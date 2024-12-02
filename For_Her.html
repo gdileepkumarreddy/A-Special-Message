@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Memories for Bujji</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #4CAF50;
+            margin-top: 30px;
+        }
+
+        .message {
+            background-color: #ffcccb;
+            padding: 20px;
+            font-size: 1.5em;
+            color: #333;
+            display: none;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-container {
+            display: none;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 70%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+        }
+
+        .notes {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 20px;
+            display: none;
+            padding: 20px;
+            background-color: #fff8dc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer {
+            font-size: 1em;
+            color: #777;
+            margin-top: 50px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Special Memories with Bujji ❤️</h1>
+
+    <!-- Popup message -->
+    <div class="message" id="popupMessage">
+        <p>I like You Bujji ❤️</p>
+    </div>
+
+    <!-- Image and notes containers -->
+    <div class="image-container" id="imageContainer">
+        <img id="image" src="" alt="Special Image">
+    </div>
+
+    <div class="notes" id="notesContainer">
+        <p id="notesText"></p>
+    </div>
+
+    <div class="footer">
+        <p>Created with love ❤️</p>
+    </div>
+
+    <script>
+        // Wait for the page to load
+        window.onload = function() {
+            // Show the popup message
+            document.getElementById("popupMessage").style.display = "block";
+            
+            // Hide the popup after 3 seconds and start the sequence of images
+            setTimeout(function() {
+                document.getElementById("popupMessage").style.display = "none";
+                showImageSequence();
+            }, 3000);
+        };
+
+        let currentImageIndex = 0;
+        const images = [
+            { src: 'image1.jpg', alt: 'Her Smile', note: 'Your smile is my favorite part of the day. It lights up everything around you.' },
+            { src: 'image2.jpg', alt: 'Her Dressing Style', note: 'You’re like a peacock with your beautiful and colorful dressing style, so unique and graceful.' },
+            { src: 'image3.jpg', alt: 'Her Smile Again', note: 'Your smile brightens even the darkest days. It’s the magic that brings joy to everyone around.' },
+            { src: 'image4.jpg', alt: 'Her Confidence', note: 'The way you carry yourself with confidence is truly inspiring.' },
+            { src: 'image5.jpg', alt: 'Her Eyes', note: 'Your eyes hold a depth of emotion that I can’t describe, they speak a thousand words.' },
+            { src: 'image6.jpg', alt: 'Her Laughter', note: 'The sound of your laughter is like music to my ears. It makes everything better.' },
+            { src: 'image7.jpg', alt: 'Her Beauty', note: 'Every time I see you, I’m reminded of how beautiful you are inside and out.' }
+        ];
+
+        function showImageSequence() {
+            if (currentImageIndex < images.length) {
+                // Show image and note
+                const imageData = images[currentImageIndex];
+                document.getElementById("image").src = imageData.src;
+                document.getElementById("image").alt = imageData.alt;
+                document.getElementById("notesText").innerText = imageData.note;
+
+                document.getElementById("imageContainer").style.display = "block";
+                document.getElementById("notesContainer").style.display = "block";
+
+                // After 10 seconds, move to next image
+                setTimeout(function() {
+                    document.getElementById("imageContainer").style.display = "none";
+                    document.getElementById("notesContainer").style.display = "none";
+                    currentImageIndex++;
+                    showImageSequence();
+                }, 10000);
+            }
+        }
+    </script>
+
+</body>
+</html>
