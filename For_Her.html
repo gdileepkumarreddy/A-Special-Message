@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Memories with Bujji</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #4CAF50;
+            margin-top: 30px;
+        }
+
+        .password-container {
+            display: block;
+            background-color: #ffcccb;
+            padding: 20px;
+            font-size: 1.5em;
+            color: #333;
+            display: block;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .password-input {
+            font-size: 1.2em;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .password-btn {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .password-btn:hover {
+            background-color: #45a049;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Popup message for the password */
+        .popup-message {
+            font-size: 1.5em;
+            color: #d9534f;
+            background-color: #fff3f3;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Password Protection Section -->
+    <div class="password-container" id="passwordSection">
+        <p>Are you that one girl for my master?</p>
+        <input type="password" class="password-input" id="passwordInput" placeholder="Enter password">
+        <button class="password-btn" onclick="checkPassword()">Submit</button>
+    </div>
+
+    <!-- Popup message -->
+    <div class="popup-message" id="popupMessage">
+        <p>Correct Password! Welcome to the special memories.</p>
+    </div>
+
+    <!-- Hidden Section for Images and Notes -->
+    <div class="hidden" id="contentSection">
+        <h1>Special Memories with Bujji ❤️</h1>
+        <div id="imageContainer"></div>
+        <div id="notesContainer"></div>
+    </div>
+
+    <script>
+        const correctPassword = "bujji123"; // Set the password here
+        let currentImageIndex = 0;
+
+        function checkPassword() {
+            const enteredPassword = document.getElementById("passwordInput").value;
+            if (enteredPassword === correctPassword) {
+                document.getElementById("passwordSection").style.display = "none";
+                document.getElementById("popupMessage").style.display = "block";
+                setTimeout(function () {
+                    document.getElementById("popupMessage").style.display = "none";
+                    showImageSequence();
+                }, 2000);
+            } else {
+                alert("Incorrect password! Please try again.");
+            }
+        }
+
+        const images = [
+             { src: 'image1.jpg', alt: 'Her Smile', note: 'Your smile is my favorite part of the day. It lights up everything around you.' },
+            { src: 'image2.jpg', alt: 'Her Dressing Style', note: 'You’re like a peacock with your beautiful and colorful dressing style, so unique and graceful.' },
+            { src: 'image3.jpg', alt: 'Her Smile Again', note: 'Your smile brightens even the darkest days. It’s the magic that brings joy to everyone around.' },
+            { src: 'image4.jpg', alt: 'Her Confidence', note: 'The way you carry yourself with confidence is truly inspiring.' },
+            { src: 'image5.jpg', alt: 'Her Eyes', note: 'Your eyes hold a depth of emotion that I can’t describe, they speak a thousand words.' },
+            { src: 'image6.jpg', alt: 'Her Laughter', note: 'The sound of your laughter is like music to my ears. It makes everything better.' },
+            { src: 'image7.jpg', alt: 'Her Beauty', note: 'Every time I see you, I’m reminded of how beautiful you are inside and out.' }
+        ];
+
+        function showImageSequence() {
+            document.getElementById("contentSection").style.display = "block";
+            if (currentImageIndex < images.length) {
+                const imageData = images[currentImageIndex];
+                const imageElement = document.createElement("img");
+                imageElement.src = imageData.src;
+                imageElement.alt = imageData.alt;
+                imageElement.style.width = "60%";
+                imageElement.style.borderRadius = "10px";
+                imageElement.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+                document.getElementById("imageContainer").appendChild(imageElement);
+
+                const notesElement = document.createElement("div");
+                notesElement.innerText = imageData.note;
+                notesElement.style.backgroundColor = "#fff8dc";
+                notesElement.style.padding = "10px";
+                notesElement.style.borderRadius = "10px";
+                notesElement.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+                document.getElementById("notesContainer").appendChild(notesElement);
+
+                setTimeout(function () {
+                    document.getElementById("imageContainer").innerHTML = "";
+                    document.getElementById("notesContainer").innerHTML = "";
+                    currentImageIndex++;
+                    showImageSequence();
+                }, 10000); // Show each image for 10 seconds
+            }
+        }
+    </script>
+
+</body>
+
+</html>
