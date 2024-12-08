@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Memories for Bujji</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7NP90VPZCF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-7NP90VPZCF');  // Your Google Analytics Tracking ID
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #4CAF50;
+            margin-top: 30px;
+        }
+
+        .message {
+            background-color: #ffcccb;
+            padding: 20px;
+            font-size: 1.5em;
+            color: #333;
+            display: block;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-container {
+            display: none;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 70%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+        }
+
+        .notes {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 20px;
+            display: none;
+            padding: 20px;
+            background-color: #fff8dc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer {
+            font-size: 1em;
+            color: #777;
+            margin-top: 50px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .password-container {
+            display: block;
+            background-color: #ffcccb;
+            padding: 20px;
+            font-size: 1.5em;
+            color: #333;
+            display: block;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .password-input {
+            font-size: 1.2em;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .password-btn {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .password-btn:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            font-size: 1.5em;
+            color: #ff0000;
+            background-color: #fff3f3;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Always Visible Message -->
+    <div class="message">
+        <p>Special Memories with Bujji ❤️</p>
+    </div>
+
+    <!-- Password Protection Section -->
+    <div class="password-container" id="passwordSection">
+        <p>Enter the password to view the special memories</p>
+        <input type="password" class="password-input" id="passwordInput" placeholder="Enter password">
+        <button class="password-btn" onclick="checkPassword()">Submit</button>
+    </div>
+
+    <!-- Popup message -->
+    <div class="message" id="popupMessage">
+        <p>I like You Bujji ❤️</p>
+    </div>
+
+    <!-- Image and notes containers -->
+    <div class="image-container" id="imageContainer">
+        <img id="image" src="" alt="Special Image">
+    </div>
+
+    <div class="notes" id="notesContainer">
+        <p id="notesText"></p>
+    </div>
+
+    <div class="footer">
+        <p>Created with love ❤️</p>
+    </div>
+
+    <div class="error-message" id="errorMessage">
+        <p>Incorrect password, please try again.</p>
+    </div>
+
+    <script>
+        const correctPassword = "bujji123"; // Set the password here
+
+        // Wait for the page to load
+        window.onload = function () {
+            // Initially hide the image and notes containers
+            document.getElementById("imageContainer").style.display = "none";
+            document.getElementById("notesContainer").style.display = "none";
+        };
+
+        function checkPassword() {
+            const enteredPassword = document.getElementById("passwordInput").value;
+            if (enteredPassword === correctPassword) {
+                document.getElementById("passwordSection").style.display = "none"; // Hide password prompt
+                document.getElementById("popupMessage").style.display = "block"; // Show the popup message
+
+                // Hide the popup after 3 seconds and start the sequence of images
+                setTimeout(function () {
+                    document.getElementById("popupMessage").style.display = "none";
+                    showImageSequence();
+                }, 3000);
+            } else {
+                // Show error message if the password is incorrect
+                document.getElementById("errorMessage").style.display = "block";
+                setTimeout(function () {
+                    document.getElementById("errorMessage").style.display = "none";
+                }, 3000); // Hide error message after 3 seconds
+            }
+        }
+
+        let currentImageIndex = 0;
+        const images = [
+            { src: 'image1.jpg', alt: 'Her Smile', note: 'Your smile is my favorite part of the day. It lights up everything around you.' },
+            { src: 'image2.jpg', alt: 'Her Dressing Style', note: 'You’re like a peacock with your beautiful and colorful dressing style, so unique and graceful.' },
+            { src: 'image3.jpg', alt: 'Her Smile Again', note: 'Your smile brightens even the darkest days. It’s the magic that brings joy to everyone around.' },
+            { src: 'image4.jpg', alt: 'Her Confidence', note: 'The way you carry yourself with confidence is truly inspiring.' },
+            { src: 'image5.jpg', alt: 'Her Eyes', note: 'Your eyes hold a depth of emotion that I can’t describe, they speak a thousand words.' },
+            { src: 'image6.jpg', alt: 'Her Laughter', note: 'The sound of your laughter is like music to my ears. It makes everything better.' },
+            { src: 'image7.jpg', alt: 'Her Beauty', note: 'Every time I see you, I’m reminded of how beautiful you are inside and out.' }
+        ];
+
+        function showImageSequence() {
+            if (currentImageIndex < images.length) {
+                // Show image and note
+                const imageData = images[currentImageIndex];
+                document.getElementById("image").src = imageData.src;
+                document.getElementById("image").alt = imageData.alt;
+                document.getElementById("notesText").innerText = imageData.note;
+
+                document.getElementById("imageContainer").style.display = "block";
+                document.getElementById("notesContainer").style.display = "block";
+
+                // After 10 seconds, move to next image
+                setTimeout(function () {
+                    document.getElementById("imageContainer").style.display = "none";
+                    document.getElementById("notesContainer").style.display = "none";
+                    currentImageIndex++;
+                    showImageSequence();
+                }, 10000); // Show each image for 10 seconds
+            }
+        }
+    </script>
+
+</body>
+
+</html>
